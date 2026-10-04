@@ -24,3 +24,6 @@ config SHIELD_DONGLE_ZDSE_PROSPECTOR
 
 config SHIELD_DONGLE_NICE
 	def_bool $(shields_list_contains,dongle_nice)
+
+config SHIELD_DONGLE_XIAO
+	def_bool $(shields_list_contains,dongle_xiao)

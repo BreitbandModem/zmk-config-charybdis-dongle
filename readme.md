@@ -1,5 +1,33 @@
 # ZMK CONFIG FOR THE CHARYBDIS 4X6 WIRELESS SPLIT KEYBOARD ZEPHYR 4.1
 
+> **Experimental 3x6 port:** The active `build.yaml` in this fork targets the
+> 3x6 Charybdis Mini with nice!nano controllers on both halves and a screenless
+> XIAO BLE dongle. The sections below document the upstream 4x6 build and its
+> optional displays; use the build matrix and the notes here for this fork.
+
+### Active firmware builds
+
+| Device | Board | Shield | Role |
+|---|---|---|---|
+| Left half (both modes) | nice!nano | `charybdis_left` | Peripheral |
+| Right half (standalone) | nice!nano | `charybdis_right_standalone` | Central with trackball |
+| Right half (dongle mode) | nice!nano | `dongle_charybdis_right` | Peripheral forwarding trackball |
+| USB dongle | XIAO BLE | `dongle_xiao` | Central receiving both halves and trackball |
+
+The QWERTY keymap is in `config/charybdis.keymap`. Its four layer indexes are
+also used by `boards/shields/charybdis/charybdis_trackball_processors.dtsi`:
+RAISE (2) scrolls and NAV (3) slows the pointer. The 3x6 matrix, five thumb
+positions, and right-side column order match the original
+`charybdis-wireless-zmk-firmware` hardware. The screenless dongle uses a mock
+kscan (no switches or display) and the input-split listener from
+`dongle_common.dtsi`. ZMK Studio is not enabled in the active builds.
+
+When switching between standalone and dongle modes, flash the corresponding
+`settings_reset` firmware to **both halves and the central** before pairing
+them again. Use the nice!nano reset build for the halves and the XIAO BLE reset
+build for the dongle. Host pairing uses ZMK's default passkey behavior (passkey
+entry is not required).
+
 This configuration supports two modes:
 
 - **Standalone Mode**: Right keyboard acts as central, connects directly to host

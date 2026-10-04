@@ -1,0 +1,11 @@
+/* USB-powered, screenless XIAO BLE central; no keyboard matrix attached. */
+#include "dongle_common.dtsi"
+
+/ {
+    kscan0: kscan {
+        compatible = "zmk,kscan-mock";
+        columns = <0>;
+        rows = <0>;
+        events = <0>;
+    };
+};
